@@ -10,14 +10,21 @@ ENV VERSION_SDK_TOOLS=3952940 \
 ENV	PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 RUN mkdir -p $ANDROID_HOME && \
-    chown -R root.root $ANDROID_HOME && \
+    chown -R ${user}.${user} $ANDROID_HOME && \
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=10000
+ARG gid=10000
 
+ENV HOME /home/${user}
+RUN addgroup -g ${gid} ${group}
+RUN adduser -h $HOME -u ${uid} -G ${group} -D ${user}
 # Install dependencies
 
 apk add --no-cache bash curl git openssl openssh-client ca-certificates && \
 
 # Install Android SDK
-
+USER ${user}
 wget -q -O sdk.zip http://dl.google.com/android/repository/sdk-tools-linux-$VERSION_SDK_TOOLS.zip && \
 unzip sdk.zip -d $ANDROID_HOME && \
 rm -f sdk.zip
@@ -26,8 +33,8 @@ rm -f sdk.zip
 
 ADD packages.txt $ANDROID_HOME
 
-RUN mkdir -p /root/.android && \
-    touch /root/.android/repositories.cfg && \
+RUN mkdir -p /${user}/.android && \
+    touch /${user}/.android/repositories.cfg && \
 
 sdkmanager --update && yes | sdkmanager --licenses && \
 sdkmanager --package_file=$ANDROID_HOME/packages.txt
