@@ -24,7 +24,7 @@ RUN mkdir -p $ANDROID_HOME && \
 apk add --no-cache bash curl git openssl openssh-client ca-certificates 
 # Install Android SDK
 USER ${user}
-RUN wget -q -O sdk.zip http://dl.google.com/android/repository/sdk-tools-linux-$VERSION_SDK_TOOLS.zip && \
+RUN cd /home/${user} && wget -q -O sdk.zip http://dl.google.com/android/repository/sdk-tools-linux-$VERSION_SDK_TOOLS.zip && \
 unzip sdk.zip -d $ANDROID_HOME && \
 rm -f sdk.zip
 
