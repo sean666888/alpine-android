@@ -18,11 +18,10 @@ ENV VERSION_SDK_TOOLS=3952940 \
 ENV	PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 RUN mkdir -p $ANDROID_HOME && \
-    chown -R ${user}.${user} $ANDROID_HOME 
+    chown -R ${user}.${user} $ANDROID_HOME && \
 # Install dependencies
 
-apk add --no-cache bash curl git openssl openssh-client ca-certificates && \
-
+apk add --no-cache bash curl git openssl openssh-client ca-certificates 
 # Install Android SDK
 USER ${user}
 RUN wget -q -O sdk.zip http://dl.google.com/android/repository/sdk-tools-linux-$VERSION_SDK_TOOLS.zip && \
