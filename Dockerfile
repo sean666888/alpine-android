@@ -32,8 +32,8 @@ rm -f sdk.zip
 
 ADD packages.txt $ANDROID_HOME
 
-RUN mkdir -p /${user}/.android && \
-    touch /${user}/.android/repositories.cfg && \
+RUN mkdir -p /home/${user}/.android && \
+    touch /home/${user}/.android/repositories.cfg && \
 
 sdkmanager --update && yes | sdkmanager --licenses && \
 sdkmanager --package_file=$ANDROID_HOME/packages.txt
