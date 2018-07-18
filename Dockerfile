@@ -30,4 +30,5 @@ RUN mkdir -p /root/.android && \
     touch /root/.android/repositories.cfg && \
 
 sdkmanager --update && yes | sdkmanager --licenses && \
-sdkmanager --package_file=$ANDROID_HOME/packages.txt
+sdkmanager --package_file=$ANDROID_HOME/packages.txt && \
+chmod -R 0777 /usr/local/android-sdk-linux
