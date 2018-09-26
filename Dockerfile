@@ -1,4 +1,4 @@
-FROM greyfoxit/alpine-openjdk8:8u131
+FROM greyfoxit/alpine-openjdk8
 
 # maintainer: Greyfox Team | team@greyfox.it | @greyfoxit
 
